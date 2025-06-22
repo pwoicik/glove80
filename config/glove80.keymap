@@ -18,6 +18,7 @@
 #define LOWER 1
 #define MAGIC 2
 #define SYMBOL 3
+#define GAME 4
 
 #define KEYS_L 0 1 2 3 4 10 11 12 13 14 15 22 23 24 25 26 27 34 35 36 37 38 39 46 47 48 49 50 51 64 65 66 67 68
 #define KEYS_R 5 6 7 8 9 16 17 18 19 20 21 28 29 30 31 32 33 40 41 42 43 44 45 58 59 60 61 62 63 75 76 77 78 79
@@ -27,12 +28,18 @@
     behaviors {
         // For the "layer" key, it'd nice to be able to use it as either a shift or a toggle.
         // Configure it as a tap dance, so the first tap (or hold) is a &mo and the second tap is a &to
-        layer_td: tap_dance_0 {
+        td0: td0 {
             compatible = "zmk,behavior-tap-dance";
-            label = "LAYER_TAP_DANCE";
             #binding-cells = <0>;
             tapping-term-ms = <200>;
             bindings = <&mo LOWER>, <&to LOWER>;
+        };
+
+        td1: td1 {
+            compatible = "zmk,behavior-tap-dance";
+            #binding-cells = <0>;
+            tapping-term-ms = <200>;
+            bindings = <&kp RET>, <&to DEFAULT>;
         };
 
         magic: magic_hold_tap {
@@ -74,44 +81,35 @@
             label = "RGB_UG_STATUS";
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings
-                = <&rgb_ug RGB_STATUS>;
+            bindings = <&rgb_ug RGB_STATUS>;
         };
 
         bt_0: bt_profile_macro_0 {
             label = "BT_0";
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings
-                = <&out OUT_BLE>,
-                  <&bt BT_SEL 0>;
+            bindings = <&out OUT_BLE>, <&bt BT_SEL 0>;
         };
 
         bt_1: bt_profile_macro_1 {
             label = "BT_1";
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings
-                = <&out OUT_BLE>,
-                  <&bt BT_SEL 1>;
+            bindings = <&out OUT_BLE>, <&bt BT_SEL 1>;
         };
 
         bt_2: bt_profile_macro_2 {
             label = "BT_2";
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings
-                = <&out OUT_BLE>,
-                  <&bt BT_SEL 2>;
+            bindings = <&out OUT_BLE>, <&bt BT_SEL 2>;
         };
 
         bt_3: bt_profile_macro_3 {
             label = "BT_3";
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings
-                = <&out OUT_BLE>,
-                  <&bt BT_SEL 3>;
+            bindings = <&out OUT_BLE>, <&bt BT_SEL 3>;
         };
     };
 
@@ -124,8 +122,8 @@
             &kp EQUAL         &kp N1              &kp N2          &kp N3          &kp N4          &kp N5                                                                                                   &kp N6       &kp N7         &kp N8          &kp N9           &kp N0             &kp MINUS
             &kp TAB           &kp Q               &kp W           &kp E           &kp R           &kp T                                                                                                    &kp Y        &kp U          &kp I           &kp O            &kp P              &kp BSLH
             &kp ESC           &hml LCTRL A        &hml LSHFT S    &hml LGUI D     &hml LALT F     &kp G                                                                                                    &kp H        &hmr LALT J    &hmr LGUI K     &hmr LSHFT L     &hmr LCTRL SEMI    &kp SQT
-            &kp GRAVE         &kp Z               &kp X           &kp C           &kp V           &kp B           &kp LSHFT   &kp DEL     &layer_td        &none       &none            &kp RSHFT          &kp N        &kp M          &kp COMMA       &kp DOT          &kp FSLH           &kp PG_UP
-            &magic MAGIC 0    &kp HOME            &kp END         &kp LEFT        &kp RIGHT                       &kp SPACE   &kp BSPC    &none            &none       &lt SYMBOL RET   &kp RALT                        &kp UP         &kp DOWN        &kp LBKT         &kp RBKT           &kp PG_DN
+            &kp GRAVE         &kp Z               &kp X           &kp C           &kp V           &kp B           &kp LSHFT   &kp DEL     &td0             &none       &none            &kp RSHFT          &kp N        &kp M          &kp COMMA       &kp DOT          &kp FSLH           &kp PG_UP
+            &magic MAGIC 0    &kp HOME            &kp END         &kp LEFT        &kp RIGHT                       &kp SPACE   &kp BSPC    &to GAME         &none       &lt SYMBOL RET   &kp RALT                        &kp UP         &kp DOWN        &kp LBKT         &kp RBKT           &kp PG_DN
             >;
         };
 
@@ -159,6 +157,17 @@
             &kp HASH          &kp CARET           &kp EQUAL       &kp UNDER       &kp DLLR        &kp STAR                                                                                                 &kp DQT      &none          &none           &none            &none              &none
             &kp TILDE         &kp LT              &kp PIPE        &kp MINUS       &kp GT          &kp FSLH        &kp BSLH    &kp DOT     &kp STAR         &none       &none            &none              &kp SQT      &none          &none           &none            &none              &none
             &none             &kp AMPS            &kp SQT         &kp DQT         &kp PLUS                        &kp PRCNT   &kp COLON   &kp AT           &none       &none            &none                           &none          &none           &none            &none              &none
+            >;
+        };
+
+        game_layer {
+            bindings = <
+            &kp ESC           &kp P               &kp O           &kp N           &kp BSPC                                                                                                                              &kp F1         &kp F2          &kp F3           &kp F4             &kp F5
+            &kp M             &kp 6               &kp 7           &kp 8           &kp 9           &kp 0                                                                                                    &kp F6       &kp F7         &kp F8          &kp F9           &kp F10            &kp F11
+            &kp I             &kp 1               &kp 2           &kp 3           &kp 4           &kp 5                                                                                                    &kp Y        &kp U          &kp I           &kp O            &kp P              &kp F12
+            &kp T             &kp TAB             &kp Q           &kp W           &kp E           &kp R                                                                                                    &kp H        &kp J          &kp K           &kp L            &kp SEMI           &kp SQT
+            &kp G             &kp LSHFT           &kp A           &kp S           &kp D           &kp F           &kp LSHFT   &kp LALT    &td1             &kp ESC     &kp UP           &kp RET            &kp N        &kp M          &kp COMMA       &kp DOT          &kp FSLH           &kp BSLH
+            &kp B             &kp LCTRL           &kp Z           &kp X           &kp C                           &kp SPACE   &kp LCTRL   &kp V            &kp LEFT    &kp DOWN         &kp RIGHT                       &kp MINUS      &kp LBKT        &kp RBKT         &kp EQUAL          &kp GRAVE
             >;
         };
     };
