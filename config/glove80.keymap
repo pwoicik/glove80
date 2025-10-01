@@ -54,6 +54,14 @@
             bindings = <&kp>, <&to>;
         };
 
+        mo_to: mo_to {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "hold-preferred";
+            tapping-term-ms = <200>;
+            bindings = <&mo>, <&to>;
+        };
+
         magic: magic {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
@@ -143,6 +151,12 @@
             #binding-cells = <0>;
             bindings = <&kp LC(V)>;
         };
+
+        ht_mouse: ht_mouse {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&mo_to MOUSE MOUSE>;
+        };
     };
 
     keymap {
@@ -154,7 +168,7 @@
             &kp EQUAL         &kp N1            &kp N2            &kp N3            &kp N4            &kp N5                                                                                                                        &kp N6            &kp N7            &kp N8            &kp N9            &kp N0            &kp MINUS
             &kp TAB           &kp Q             &kp W             &kp E             &kp R             &kp T                                                                                                                         &kp Y             &kp U             &kp I             &kp O             &kp P             &kp BSLH
             &kp ESC           &hml LCTRL A      &hml LSHFT S      &hml LGUI D       &hml LALT F       &kp G                                                                                                                         &kp H             &hmr LALT J       &hmr LGUI K       &hmr LSHFT L      &hmr LCTRL SEMI   &kp SQT
-            &kp GRAVE         &kp Z             &kp X             &kp C             &kp V             &kp B             &kp_cw LSHFT 0    &kp DEL           &none             &kp F11           &to MOUSE         &kp_cw LSHFT 0    &kp N             &kp M             &kp COMMA         &kp DOT           &kp FSLH          &kp PG_UP
+            &kp GRAVE         &kp Z             &kp X             &kp C             &kp V             &kp B             &kp_cw LSHFT 0    &kp DEL           &none             &kp F11           &ht_mouse         &kp_cw LSHFT 0    &kp N             &kp M             &kp COMMA         &kp DOT           &kp FSLH          &kp PG_UP
             &magic MAGIC 0    &kp HOME          &kp END           &kp LEFT          &kp RIGHT                           &kp SPACE         &kp BSPC          &none             &kp F12           &lt SYMBOL RET    &kp_to RALT LOWER                   &kp DOWN          &kp UP            &kp LBKT          &kp RBKT          &kp PG_DN
             >;
         };
